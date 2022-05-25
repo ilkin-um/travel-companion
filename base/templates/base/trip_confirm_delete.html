@@ -1,0 +1,7 @@
+<form method="POST">
+    {% csrf_token %}
+    <p>Do you want to delete <b>{{trip}}</b> ?</p>
+    <input type="submit" value="Yes, I do"/>
+</form>
+
+<a href="{% url 'trips' %}">Main page</a>

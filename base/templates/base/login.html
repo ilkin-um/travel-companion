@@ -1,0 +1,11 @@
+<h1> Travel Companion</h1>
+<br>
+
+<h2>Login</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Login">
+</form>
+
+<a href="{% url 'register' %}"> Register</a>

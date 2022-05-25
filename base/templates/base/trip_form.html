@@ -1,0 +1,14 @@
+<h1>Add a new trip:</h1>
+
+<form method="POST" action="">
+    {% csrf_token %}
+      {{ form }}
+
+  {% for formset in inlines %}
+    {{ formset }}
+  {% endfor %}
+    <input type="submit" value="Create new trip">
+</form>
+
+<a href="{% url 'trips' %}">Main page</a>
+

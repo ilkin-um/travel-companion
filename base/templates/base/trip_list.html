@@ -1,0 +1,55 @@
+<h1>Travel Companion</h1>
+<hr>
+{% if request.user.is_authenticated %}
+    <p>Current user: <i>{{ request.user }}</i> <a href="{% url 'logout' %}">Logout</a>
+</p>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
+<br>
+<br>
+<hr>
+
+<p>You have {{ count }} trips planned. <a href="{% url 'trip-create' %}">Add New Trip</a></p>
+
+<hr>
+<h2>Current trips:</h2>
+    {% for trip in trips %}
+       <p>{% now "Y-m-d" as todays_date %}
+            {% if todays_date > trip.start_date|date:"Y-m-d" and todays_date < trip.end_date|date:"Y-m-d"%}
+    </p>
+        <p>{{ trip.trip_title }}
+        <a href="{%  url 'trip' trip.trip_id %}">View</a>
+        <a href="{%  url 'trip-update' trip.trip_id %}">Edit trip</a>
+            <a href="{%  url 'trip-delete' trip.trip_id %}">Delete trip</a></p>
+            {% endif %}
+
+
+    {%  endfor %}
+
+<h2>Future trips:</h2>
+    {% for trip in trips %}
+       <p>{% now "Y-m-d" as todays_date %}
+            {% if todays_date < trip.start_date|date:"Y-m-d" %}
+    </p>
+        <p>{{ trip.trip_title }}
+       <a href="{%  url 'trip' trip.trip_id %}">View</a>
+       <a href="{%  url 'trip-update' trip.trip_id %}">Edit trip</a>
+            <a href="{%  url 'trip-delete' trip.trip_id %}">Delete trip</a></p>
+            {% endif %}
+
+    {%  endfor %}
+
+<h2>Past trips:</h2>
+    {% for trip in trips %}
+       <p>{% now "Y-m-d" as todays_date %}
+            {% if todays_date > trip.end_date|date:"Y-m-d" %}
+    </p>
+        <p>{{ trip.trip_title }}
+        <a href="{%  url 'trip' trip.trip_id %}">View</a>
+        <a href="{%  url 'trip-update' trip.trip_id %}">Edit trip</a>
+            <a href="{%  url 'trip-delete' trip.trip_id %}">Delete trip</a></p>
+            {% endif %}
+
+
+    {%  endfor %}
